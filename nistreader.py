@@ -21,6 +21,7 @@ import struct
 # ........
 # xxxx     unsigned byte   ??               pixel
 
+
 class NistReader:
 
     def __init__(self, name):
@@ -54,3 +55,21 @@ class NistReader:
                            image[self.cols * i : self.cols * (i+1)]])
         return label, binary
 
+    def read_acceptable(self, classes=[0, 1]):
+        while True:
+            label, image = self.read_item()
+            if label in classes:
+                return label, image
+
+    def read_balanced(self, number, classes=[0, 1]):
+        req = classes.copy()
+        ret = {x: [] for x in classes}
+        while True:
+            label, image = self.read_acceptable(req)
+            if len(ret[label]) < number:
+                ret[label].append(image)
+            else:
+                req.remove(label)
+            if len(req) == 0:
+                break
+        return ret

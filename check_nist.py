@@ -6,8 +6,13 @@ Check out NIST reader to see some images
 from nistreader import NistReader as NR
 
 nr = NR('train')
-for i in range(0, 9):
-    label, image = nr.read_item()
-    print('Label:', label)
-    for x in image:
+items = nr.read_balanced(5)
+print('Zeros (0)')
+for i in range(0, 5):
+    for x in items[0][i]:
+        print(' '.join(['#' if y else ' ' for y in x]))
+print('')
+print('Ones (1)')
+for i in range(0, 5):
+    for x in items[1][i]:
         print(' '.join(['#' if y else ' ' for y in x]))
