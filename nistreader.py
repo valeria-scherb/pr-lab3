@@ -42,6 +42,10 @@ class NistReader:
         self.cols = struct.unpack('>i', self.img_file.read(4))[0]
         self.im_size = self.rows * self.cols
 
+    def close(self):
+        self.img_file.close()
+        self.lbl_file.close()
+
     def skip_items(self, n=1):
         self.lbl_file.read(n)
         self.img_file.read(self.im_size * n)
