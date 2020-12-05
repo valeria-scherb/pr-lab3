@@ -65,3 +65,14 @@ class ExpMax:
         for n in range(0, self.N):
             r += self.z[n][m]
         return r
+
+    def classify(self, x):
+        info = self.class_info(x)
+        return max(info, key=info.get)
+
+    def class_info(self, x):
+        return {k: self.cluster_sum(x, k) for k in range(0, self.K)}
+
+    def cluster_sum(self, x, k):
+        mu = self.mu[k]
+        return sum([mu[i] if x[i] else 1 - mu[i] for i in range(0, self.D)])
