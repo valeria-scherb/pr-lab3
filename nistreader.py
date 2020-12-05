@@ -53,10 +53,7 @@ class NistReader:
     def read_item(self):
         label = struct.unpack('b', self.lbl_file.read(1))[0]
         image = self.img_file.read(self.im_size)
-        binary = []
-        for i in range(0, self.rows):
-            binary.append([1 if x > 127 else 0 for x in
-                           image[self.cols * i : self.cols * (i+1)]])
+        binary = [1 if x > 127 else 0 for x in image]
         return label, binary
 
     def read_acceptable(self, classes=[0, 1]):
@@ -77,3 +74,9 @@ class NistReader:
             if len(req) == 0:
                 break
         return ret
+
+    def make_matrix(self, linear):
+        mat = []
+        for i in range(0, self.rows):
+            mat.append(linear[self.cols * i : self.cols * (i+1)])
+        return mat

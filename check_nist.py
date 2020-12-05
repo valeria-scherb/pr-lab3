@@ -9,10 +9,10 @@ nr = NR('train')
 items = nr.read_balanced(5)
 print('Zeros (0)')
 for i in range(0, 5):
-    for x in items[0][i]:
+    for x in nr.make_matrix(items[0][i]):
         print(' '.join(['#' if y else ' ' for y in x]))
 print('')
 print('Ones (1)')
 for i in range(0, 5):
-    for x in items[1][i]:
+    for x in nr.make_matrix(items[1][i]):
         print(' '.join(['#' if y else ' ' for y in x]))
