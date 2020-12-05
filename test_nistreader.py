@@ -64,6 +64,16 @@ class TestNistReader(unittest.TestCase):
         self.assertEqual(data[0], zeros)
         self.assertEqual(data[1], ones)
 
+    def test_linear_matrix(self):
+        nr = NR('train')
+        label, data = nr.read_item()
+        self.assertEqual(nr.im_size, nr.rows * nr.cols)
+        self.assertEqual(len(data), nr.im_size)
+        mat = nr.make_matrix(data)
+        self.assertEqual(len(mat), nr.rows)
+        self.assertEqual(len(mat[0]), nr.cols)
+        nr.close()
+
 
 if __name__ == '__main__':
     unittest.main()
