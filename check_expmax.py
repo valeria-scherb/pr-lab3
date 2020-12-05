@@ -25,4 +25,10 @@ em.run()
 
 print('mu1', em.mu)
 print('pi1', em.pi)
-print('z', em.z)
+print('z1', em.z)
+
+em.run()
+
+print('mu2', em.mu)
+print('pi2', em.pi)
+print('z2', em.z)
